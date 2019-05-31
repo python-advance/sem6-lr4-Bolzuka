@@ -62,17 +62,6 @@ def perceptron_not(input_X, theta):
     return results
 
 
-def perceptron_xnor(input_X, theta_and, theta_or, theta_not):
-    new_input_X = []
-    a1 = perceptron_and(input_X, theta_and)
-    for item in input_X:
-        new_input_X.append(tuple(perceptron_not(list(item), theta_not)))
-    a2 = perceptron_and(new_input_X, theta_and)
-    a1a2 = list(zip(a1, a2))
-    result = perceptron_or(a1a2, theta_or)
-    return result, a1, a2
-
-
 def perceptron_xor(input_X, theta_and, theta_or, theta_not):
     new_input_X = []
     a1 = perceptron_or(input_X, theta_or)
@@ -81,6 +70,17 @@ def perceptron_xor(input_X, theta_and, theta_or, theta_not):
     a2 = perceptron_or(new_input_X, theta_or)
     a1a2 = list(zip(a1, a2))
     result = perceptron_and(a1a2, theta_and)
+    return result, a1, a2
+    
+
+def perceptron_xnor(input_X, theta_and, theta_or, theta_not):
+    new_input_X = []
+    a1 = perceptron_and(input_X, theta_and)
+    for item in input_X:
+        new_input_X.append(tuple(perceptron_not(list(item), theta_not)))
+    a2 = perceptron_and(new_input_X, theta_and)
+    a1a2 = list(zip(a1, a2))
+    result = perceptron_or(a1a2, theta_or)
     return result, a1, a2
 
 
